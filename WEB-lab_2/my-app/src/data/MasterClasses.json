@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Мастер-класс 1",
+    "description": "Описание 1",
+    "participants": 10,
+    "doctors": 2
+  },
+  {
+    "id": 2,
+    "name": "Мастер-класс 2",
+    "description": "Описание 2",
+    "participants": 15,
+    "doctors": 3
+  }
+]
