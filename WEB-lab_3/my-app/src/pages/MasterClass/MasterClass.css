@@ -3,7 +3,7 @@
   flex-direction: column;
   min-height: 100vh;
   background-color: #000;
-  color: #8b8b8b;
+  color: #ffffff;
   font-family: 'Cormorant Garamond', serif;
 }
 
@@ -17,7 +17,7 @@
 
 .action-btn {
   padding: 10px 20px;
-  background: #c70606;
+  background: rgb(137, 44, 69);
   color: white;
   border: none;
   border-radius: 5px;
@@ -31,14 +31,15 @@
 }
 
 .action-btn:disabled {
-  background: #666;
+  background: #8d8d8d;
   cursor: not-allowed;
 }
 
 .product_card_m {
-  background: #ffffff;
+  background: #000000;
   padding: 1.5rem;
   border-radius: 10px;
+  border: 1px solid rgb(137, 44, 69);
   text-align: center;
   transition: transform 0.3s ease, opacity 0.3s ease;
   animation: fadeIn 0.5s ease-in-out;
@@ -46,8 +47,7 @@
 }
 
 .product_card.highlighted {
-  background: #171616;
-  border: 2px solid #c70606;
+  background: rgb(137, 44, 69);
 }
 
 .card-actions {
@@ -72,8 +72,9 @@
 }
 
 .modal-content {
-  background: #fff;
-  color: #000;
+  background: #000000;
+  border: 1px solid rgb(137, 44, 69);
+  color: #ffffff;
   padding: 2rem;
   border-radius: 10px;
   max-width: 500px;
@@ -105,6 +106,8 @@
   gap: 1rem;
   justify-content: center;
 }
+
+
 
 @keyframes slideIn {
   from {
@@ -155,4 +158,11 @@
   .modal-input, .modal-textarea {
     font-size: 14px;
   }
+}
+
+.button_card_style{
+  background-color: #000;
+  border: 2px solid rgb(99, 0, 0);
+  color: white;
+  padding: 3px;
 }

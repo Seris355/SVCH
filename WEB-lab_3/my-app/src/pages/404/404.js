@@ -9,7 +9,7 @@ const NotFound = () => {
   const handleMouseMove = (e) => {
     const spotlight = document.getElementById('spotlight');
     if (spotlight) {
-      spotlight.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, transparent 100px, rgba(0, 0, 0, 0.95) 150px)`;
+      spotlight.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, transparent 0  100px, rgba(0, 0, 0, 0.95) 200px)`;
     }
   };
 

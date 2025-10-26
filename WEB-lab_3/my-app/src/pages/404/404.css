@@ -14,8 +14,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.95);
-  pointer-events: none;
   z-index: 1;
 }
 
@@ -44,7 +42,7 @@
 
 .nf-action-btn {
   padding: 10px 20px;
-  background: #c70606;
+  background: #ffffff;
   color: white;
   border: none;
   border-radius: 5px;
