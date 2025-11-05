@@ -60,7 +60,7 @@ const MasterClass = () => {
 
   return (
     <div> 
-      <Header />   
+         
       <main className="page-container">
         <section className="H1_sec">
           <div className="H1_scroll">
@@ -109,7 +109,7 @@ const MasterClass = () => {
           />
         )}
       </main>
-      <Footer />
+      
     </div>
   );
 };

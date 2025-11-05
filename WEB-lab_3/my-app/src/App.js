@@ -22,7 +22,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Header /> {}
+        <Header />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/contact" element={<Contact />} />
@@ -31,7 +31,7 @@ function App() {
           <Route path="/masterclass" element={<MasterClass />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer /> {}
+        <Footer />
       </Router>
     </ThemeProvider>
   );

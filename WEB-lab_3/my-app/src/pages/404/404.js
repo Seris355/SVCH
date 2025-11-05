@@ -15,7 +15,7 @@ const NotFound = () => {
 
   return (
     <div>
-      <Header />
+      
       <main className="page-container nf-page-container" onMouseMove={handleMouseMove}>
         <div id="spotlight" className="spotlight" />
         <section className="H1_sec">
@@ -26,7 +26,7 @@ const NotFound = () => {
           </div>
         </section>
       </main>
-      <Footer />
+      
     </div>
   );
 };

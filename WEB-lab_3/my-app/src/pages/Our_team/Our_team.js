@@ -13,7 +13,7 @@ const Masters = () => {
 
   return (
     <div className="masters-container">
-      <Header />
+      
       <main>
         <section className="section_main">
           <h1 className="h2_text">Наши мастера</h1>
@@ -34,7 +34,7 @@ const Masters = () => {
           </div>
         </section>
       </main>
-      <Footer />
+      
     </div>
   );
 };

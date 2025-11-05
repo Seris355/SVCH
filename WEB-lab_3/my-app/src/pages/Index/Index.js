@@ -1,114 +1,392 @@
 import React from 'react';
-import Header from '../../components/Header/Header.js';
-import Footer from '../../components/Footer/Footer.js';
-import './style.css'; 
+import {
+  // Основные компоненты
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Box,
+  Grid,
+  IconButton,
+  Link,
+  Divider,
+  // Новые компоненты
+  Container,
+  Card,
+  CardMedia,
+  CardContent,
+  Paper,
+  Fade,
+  Chip 
+} from '@mui/material';
+import { styled, keyframes } from '@mui/system';
+
+// Анимации
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const shake = keyframes`
+  25% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+`;
+
+// Стилизованные компоненты с шрифтом Cormorant Garamond
+const GlobalStylesBox = styled(Box)({
+  '& *': {
+    padding: 0,
+    margin: 0,
+    boxSizing: 'border-box',
+    fontFamily: '"Cormorant Garamond", serif !important',
+  },
+  '& a': {
+    color: '#ffffff',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+    '&:visited': {
+      color: '#ffffff',
+    },
+  },
+  '& ul': {
+    listStyleType: 'none',
+    paddingLeft: 0,
+  },
+  // Центрирование всего контента
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  minHeight: '100vh',
+  width: '100%',
+  fontFamily: '"Cormorant Garamond", serif',
+});
+
+const MainContainer = styled(Box)({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  fontFamily: '"Cormorant Garamond", serif',
+});
+
+const HeroSection = styled(Paper)(({ theme }) => ({
+  height: '720px',
+  width: '100vw',
+  backgroundAttachment: 'fixed',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  zIndex: 0,
+  opacity: 1,
+  animation: `${fadeIn} 2.2s ease-in-out forwards`,
+  fontFamily: '"Cormorant Garamond", serif',
+  [theme.breakpoints.down('md')]: {
+    height: '30rem',
+  },
+  [theme.breakpoints.down('sm')]: {
+    height: '25rem',
+  },
+}));
+
+const HeroScroll = styled(Box)({
+  maxWidth: '900px',
+  textAlign: 'center',
+  fontStyle: 'normal',
+  width: '100%',
+  fontFamily: '"Cormorant Garamond", serif',
+});
+
+const AnimatedImage = styled('img')({
+  animation: `${shake} 4s ease-in-out infinite`,
+});
+
+const ProductCard = styled(Card)({
+  '&:hover': {
+    transition: 'transform 0.3s ease',
+    transform: 'scale(1.03)',
+  },
+  fontFamily: '"Cormorant Garamond", serif',
+});
+
+const PartnersSection = styled(Box)(({ theme }) => ({
+  marginTop: '5.12rem',
+  display: 'flex',
+  justifyContent: 'space-between',
+  width: '100%',
+  maxWidth: '1200px',
+  padding: '0 50px',
+  fontFamily: '"Cormorant Garamond", serif',
+  [theme.breakpoints.down('lg')]: {
+    padding: '0 40px',
+  },
+  [theme.breakpoints.down('md')]: {
+    padding: '0 25px',
+    gap: '20px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    padding: '0 16px',
+    gap: '10px',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+}));
+
+const ProductGrid = styled(Grid)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  flexWrap: 'wrap',
+  gap: '44px',
+  width: '100%',
+  maxWidth: '1200px',
+  margin: '0 auto',
+  fontFamily: '"Cormorant Garamond", serif',
+  [theme.breakpoints.down('md')]: {
+    gap: '30px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    gap: '20px',
+    padding: '0 15px',
+  },
+}));
+
+// Создаем тему с шрифтом Cormorant Garamond
+const CormorantTypography = styled(Typography)({
+  fontFamily: '"Cormorant Garamond", serif !important',
+});
 
 const Index = () => {
   const backgroundStyle = {
     backgroundImage: 'url(/images/main_page_images/main_background.png)',
-    backgroundAttachment: 'fixed',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
   };
+
+  const services = [
+    {
+      image: "/images/main_page_images/parik.png",
+      title: "Консультация врача",
+      link: "/service_page/service.html"
+    },
+    {
+      image: "/images/main_page_images/mani.png",
+      title: "Онлайн-консультация врача",
+      link: "/service_page/service.html"
+    },
+    {
+      image: "/images/main_page_images/pedi.png",
+      title: "Подбор питания",
+      link: "/service_page/service.html"
+    },
+    {
+      image: "/images/main_page_images/kosme.png",
+      title: "Сдать анализы",
+      link: "/service_page/service.html"
+    },
+    {
+      image: "/images/main_page_images/estet.png",
+      title: "Расшифровать анализы",
+      link: "/service_page/service.html"
+    },
+    {
+      image: "/images/main_page_images/vizaz.png",
+      title: "Ведение с врачом",
+      link: "#"
+    }
+  ];
+
+  const partners = [
+    "/images/main_page_images/partner1.png",
+    "/images/main_page_images/partner2.png",
+    "/images/main_page_images/partner3.png",
+    "/images/main_page_images/partnrer4.png"
+  ];
+
   return (
-    <div className="index-container">
-      <Header />
-      <main className="main">
-        <section className="H1_sec" style={backgroundStyle}>
-          <div className="container">
-            <div className="H1_scroll">
-              <h1 className="white">Школа инсулинорезистентности и диабета «Delote-Beauty» на Крестовском</h1>
-            </div>
-          </div>
-        </section>
+    <GlobalStylesBox>
+      <MainContainer>
+        {/* Hero Section с Fade анимацией */}
+        <HeroSection elevation={0} style={backgroundStyle}>
+          <Fade in={true} timeout={2200}>
+            <Container maxWidth="lg" sx={{ display: 'flex', justifyContent: 'center' }}>
+              <HeroScroll>
+                <CormorantTypography 
+                  variant="h1" 
+                  sx={{
+                    fontSize: { xs: '50px', sm: '60px', md: '72px' },
+                    fontWeight: 700,
+                    lineHeight: { xs: '110%', sm: '120%' },
+                    color: 'white',
+                    padding: { xs: '20px', sm: '35px', md: '0 50px' },
+                    textAlign: 'center',
+                    width: '100%',
+                    fontFamily: '"Cormorant Garamond", serif',
+                  }}
+                >
+                  Школа диабета «Delote-Beauty» на Крестовском
+                </CormorantTypography>
+              </HeroScroll>
+            </Container>
+          </Fade>
+        </HeroSection>
 
-        <section className="reviews">
-          <div className="container">
-            <div className="reviews_items">
-              <img src="/images/main_page_images/idk.svg" alt="Декоративное изображение" className="idk_image" />
-              <p className="text_main_huge">
-                Добро пожаловать в салон школу диабета, где рождается ваша неповторимая красота и здоровье! Наши врачи – настоящие волшебники, способные подчеркнуть вашу природную привлекательность и создать образ, который будет вызывать восхищение. Они подберут для вас индивидуальную программу питания, соответствующее вашему характеру и образу жизни. Каждый визит к нам – это не просто процедура, а настоящий ритуал, возвращающий молодость, энергию, красоту.
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* Reviews Section */}
+        <Container maxWidth="lg" sx={{ mt: 4, display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <Box 
+            sx={{ 
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              margin: '2rem auto 0',
+              maxWidth: '850px',
+              textAlign: 'center',
+              width: '100%',
+            }}
+          >
+            <AnimatedImage 
+              src="/images/main_page_images/idk.svg" 
+              alt="Декоративное изображение" 
+            />
+            <CormorantTypography 
+              sx={{
+                fontSize: { xs: '22px', sm: '25px', md: '27px' },
+                fontWeight: 700,
+                lineHeight: '130%',
+                textAlign: 'center',
+                padding: { xs: '0 20px', sm: 0 },
+                mt: 2,
+                width: '100%',
+                color: 'white',
+                fontFamily: '"Cormorant Garamond", serif',
+              }}
+            >
+              Добро пожаловать в салон школу диабета, где рождается ваша неповторимая красота и здоровье! 
+              Наши врачи – настоящие волшебники, способные подчеркнуть вашу природную привлекательность 
+              и создать образ, который будет вызывать восхищение. Они подберут для вас индивидуальную 
+              программу питания, соответствующее вашему характеру и образу жизни. Каждый визит к нам – 
+              это не просто процедура, а настоящий ритуал, возвращающий молодость, энергию, красоту.
+            </CormorantTypography>
+          </Box>
+        </Container>
 
-        <section className="product">
-          <div className="product_list">
-            <a href="/service_page/service.html" className="product_card">
-              <div className="product_card_img">
-                <img src="/images/main_page_images/parik.png" alt="Консултация диетолога" className="image_main" />
-              </div>
-              <h3 className="text_under_product">Консультация варча</h3>
-            </a>
-            <a href="/service_page/service.html" className="product_card">
-              <div className="product_card_img">
-                <img src="/images/main_page_images/mani.png" alt="Маникюр" className="image_main" />
-              </div>
-              <h3 className="text_under_product">Онлайн-консультация варча</h3>
-            </a>
-            <a href="/service_page/service.html" className="product_card">
-              <div className="product_card_img">
-                <img src="/images/main_page_images/pedi.png" alt="Педикюр" className="image_main" />
-              </div>
-              <h3 className="text_under_product">Подбо питания</h3>
-            </a>
-            <a href="/service_page/service.html" className="product_card">
-              <div className="product_card_img">
-                <img src="/images/main_page_images/kosme.png" alt="Косметология" className="image_main" />
-              </div>
-              <h3 className="text_under_product">Сдать анализы</h3>
-            </a>
-            <a href="/service_page/service.html" className="product_card">
-              <div className="product_card_img">
-                <img src="/images/main_page_images/estet.png" alt="Эстетист по телу" className="image_main" />
-              </div>
-              <h3 className="text_under_product">Расшифровать анализы</h3>
-            </a>
-            <a href="#" className="product_card">
-              <div className="product_card_img">
-                <img src="/images/main_page_images/vizaz.png" alt="Визаж" className="image_main" />
-              </div>
-              <h3 className="text_under_product">Ведение с врачом</h3>
-            </a>
-          </div>
-        </section>
+        {/* Products Section */}
+        <Box sx={{ 
+          mt: '3.25rem', 
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center'
+        }}>
+          <Container maxWidth="xl" sx={{ display: 'flex', justifyContent: 'center' }}>
+            <ProductGrid container justifyContent="center">
+              <Chip></Chip>
+              {services.map((service, index) => (
+                <Grid 
+                  item 
+                  key={index} 
+                  xs={12} 
+                  sm={6} 
+                  md={4} 
+                  lg={4}
+                  sx={{ 
+                    display: 'flex',
+                    justifyContent: 'center',
+                    mb: { xs: 2, sm: 0 }
+                  }}
+                >
+                  <Link href={service.link} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <ProductCard sx={{ 
+                      maxWidth: 345,
+                      width: { xs: 300, sm: 320, md: 345 },
+                      mx: 'auto',
+                      fontFamily: '"Cormorant Garamond", serif',
+                    }}>
+                      <CardMedia
+                        component="img"
+                        image={service.image}
+                        alt={service.title}
+                        sx={{ 
+                          borderRadius: '10px',
+                          width: '100%',
+                          height: 200,
+                          objectFit: 'cover'
+                        }}
+                      />
+                      <CardContent sx={{ textAlign: 'center', bgcolor: 'background.paper' }}>
+                        <CormorantTypography 
+                          sx={{
+                            fontSize: { xs: '24px', sm: '28px', md: '30px' },
+                            fontWeight: 400,
+                            lineHeight: '120%',
+                            textAlign: 'center',
+                            color: 'text.primary',
+                            fontFamily: '"Cormorant Garamond", serif',
+                          }}
+                        >
+                          {service.title}
+                        </CormorantTypography>
+                      </CardContent>
+                    </ProductCard>
+                  </Link>
+                </Grid>
+              ))}
+            </ProductGrid>
+          </Container>
+        </Box>
 
-        {/* <section className="gallery-section">
-          <h2 className="gallery-title">Галерея</h2>
-          <div className="gallery-grid">
-            <img src="/images/gallery_images/g1.jpg" alt="Фото 1" className="gallery-image" />
-            <img src="/images/gallery_images/g2.jpg" alt="Фото 2" className="gallery-image" />
-            <img src="/images/gallery_images/g3.jpeg" alt="Фото 3" className="gallery-image" />
-            <img src="/images/gallery_images/g4.jpg" alt="Фото 4" className="gallery-image" />
-            <img src="/images/gallery_images/g5.jpg" alt="Фото 5" className="gallery-image" />
-            <img src="/images/gallery_images/g6.jpg" alt="Фото 6" className="gallery-image" />
-            <img src="/images/gallery_images/g7.png" alt="Фото 7" className="gallery-image" />
-            <img src="/images/gallery_images/g8.jpg" alt="Фото 8" className="gallery-image" />
-            <img src="/images/gallery_images/g9.jpg" alt="Фото 9" className="gallery-image" />
-            <img src="/images/gallery_images/g10.jpg" alt="Фото 10" className="gallery-image" />
-          </div>
-        </section> */}
+        
+  {/* Partners Section */}
+        <Container maxWidth="lg">
+          <PartnersSection>
+            {partners.map((partner, index) => (
+              <Box 
+                key={index} 
+                sx={{ 
+                  maxWidth: { xs: '320px', sm: 'auto' },
+                  height: { xs: '25%', sm: 'auto' },
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <img 
+                  src={partner} 
+                  alt={`Партнер ${index + 1}`}
+                  style={{ 
+                    width: '100%', 
+                    height: 'auto',
+                    maxWidth: '100%'
+                  }}
+                />
+              </Box>
+            ))}
+          </PartnersSection>
+        </Container>
 
-        <section>
-          <div className="partners">
-            <div className="logo_p">
-              <img src="/images/main_page_images/partner1.png" alt="Партнер 1" className="logos_partners" />
-            </div>
-            <div className="logo_p">
-              <img src="/images/main_page_images/partner2.png" alt="Партнер 2" className="logos_partners" />
-            </div>
-            <div className="logo_p">
-              <img src="/images/main_page_images/partner3.png" alt="Партнер 3" className="logos_partners" />
-            </div>
-            <div className="logo_p">
-              <img src="/images/main_page_images/partnrer4.png" alt="Партнер 4" className="logos_partners" />
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+        {/* Divider для визуального разделения */}
+        <Container maxWidth="lg" sx={{ mt: 5, mb: 3, display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <Divider sx={{ 
+            bgcolor: 'rgba(255,255,255,0.3)', 
+            width: '100%',
+            maxWidth: '1200px'
+          }} />
+        </Container>
+      </MainContainer>
+    </GlobalStylesBox>
   );
 };
 

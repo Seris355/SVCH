@@ -5,7 +5,6 @@ import './contact_styles.css';
 const Contact = () => {
   return (
     <div>
-      <Header/>
     <main>
       <section className="contact">
         <h2 className="text1">Контакты</h2>

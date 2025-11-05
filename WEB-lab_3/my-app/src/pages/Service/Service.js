@@ -14,7 +14,7 @@ const Services = () => {
   return (
     <div>
     <main>
-      <Header />
+      
       <section className="services">
         <h2 className="h2_underh">Цены на услуги</h2>
         <div className="services_section">
@@ -45,7 +45,7 @@ const Services = () => {
         </div>
       </section>
     </main>
-    <Footer />
+    
     </div>
   );
 };
