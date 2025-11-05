@@ -1,0 +1,107 @@
+/* типографика */
+
+.h2_underh {
+    text-align: center;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.flex_price {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+    font-size: 27px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%;
+}
+
+.services {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+}
+
+.price_money {
+    white-space: nowrap;
+}
+
+/* секции услуг */
+
+.services_section {
+    padding: 0 1.5rem;
+    margin-bottom: 5rem;
+}
+
+.services_section img {
+    border-radius: 10px;
+}
+
+.service_price {
+    width: 100%;
+    margin-top: -2.35rem;
+}
+
+.price {
+    margin-left: auto;
+}
+
+/* карточки услуг */
+
+.price_card1 {
+    display: flex;
+    justify-content: space-between;
+    gap: 6vw;
+}
+
+.price_card2 {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 6vw;
+}
+
+.price_card3 {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 6vw;
+}
+
+/* адаптивность */
+
+/* планшеты */
+@media (max-width: 1200px) {
+    .service_img {
+        margin: auto 0;
+        width: 45vw;
+        height: 36.4vw;
+    }
+}
+
+@media (max-width: 900px) {
+    .h2_underh {
+        text-align: center;
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+    }
+}
+
+/* мобильные устройства */
+@media (max-width: 650px) {
+    .price_card1,
+    .price_card2,
+    .price_card3 {
+        flex-direction: column;
+    }
+    
+    .service_img {
+        margin: 0 auto;
+    }
+}
