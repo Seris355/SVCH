@@ -22,8 +22,8 @@ header {
     font-weight: 600;
     position: relative;
     z-index: 10;
-    top: -132%;
     animation: headerSlideIn 0.8s ease forwards;
+    height: 40px;
     
 }
 
@@ -79,13 +79,17 @@ header {
 }
 
 .logo_header {
+    position: absolute;
+    left: 50%;
+    top: -25%;
+    transform: translateX(-50%);
     transition: transform 0.5s ease;
     display: inline-block;
 }
 
-.logo_header:hover {
+/* .logo_header:hover {
     animation: shake 1s ease-in-out 3;
-}
+} */
 
 /* мобильное меню (бургер) */
 
@@ -299,3 +303,4 @@ footer {
         max-height: 35px;
     }
 }
+

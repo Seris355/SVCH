@@ -11,16 +11,11 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import './pages/Index/style.css';
 
-const theme = createTheme({
-  palette: {
-    primary: { main: '#1976d2' },
-    background: { paper: '#fff' },
-  },
-});
+
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+
       <Router>
         <Header />
         <Routes>
@@ -33,7 +28,7 @@ function App() {
         </Routes>
         <Footer />
       </Router>
-    </ThemeProvider>
+
   );
 }
 

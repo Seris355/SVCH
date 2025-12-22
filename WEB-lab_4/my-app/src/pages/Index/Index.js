@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from '../../components/Header/Header.js';
-import Footer from '../../components/Footer/Footer.js';
 import './style.css'; 
 
 const Index = () => {
@@ -12,7 +10,6 @@ const Index = () => {
   };
   return (
     <div className="index-container">
-      <Header />
       <main className="main">
         <section className="H1_sec" style={backgroundStyle}>
           <div className="container">
@@ -107,7 +104,6 @@ const Index = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };

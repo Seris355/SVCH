@@ -1,13 +1,9 @@
 import React from 'react';
 import {
   // Основные компоненты
-  AppBar,
-  Toolbar,
   Typography,
-  Button,
   Box,
   Grid,
-  IconButton,
   Link,
   Divider,
   // Новые компоненты
@@ -20,6 +16,16 @@ import {
   Chip 
 } from '@mui/material';
 import { styled, keyframes } from '@mui/system';
+
+// xs - 0px+
+
+// sm - 600px+
+
+// md - 900px+
+
+// lg - 1200px+
+
+// xl - 1536px+
 
 // Анимации
 const fadeIn = keyframes`
@@ -46,7 +52,7 @@ const shake = keyframes`
   }
 `;
 
-// Стилизованные компоненты с шрифтом Cormorant Garamond
+
 const GlobalStylesBox = styled(Box)({
   '& *': {
     padding: 0,
@@ -167,7 +173,7 @@ const ProductGrid = styled(Grid)(({ theme }) => ({
   },
 }));
 
-// Создаем тему с шрифтом Cormorant Garamond
+
 const CormorantTypography = styled(Typography)({
   fontFamily: '"Cormorant Garamond", serif !important',
 });
@@ -220,7 +226,6 @@ const Index = () => {
   return (
     <GlobalStylesBox>
       <MainContainer>
-        {/* Hero Section с Fade анимацией */}
         <HeroSection elevation={0} style={backgroundStyle}>
           <Fade in={true} timeout={2200}>
             <Container maxWidth="lg" sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -320,7 +325,7 @@ const Index = () => {
                         image={service.image}
                         alt={service.title}
                         sx={{ 
-                          borderRadius: '10px',
+                          borderRadius: '5px',
                           width: '100%',
                           height: 200,
                           objectFit: 'cover'
@@ -377,7 +382,6 @@ const Index = () => {
           </PartnersSection>
         </Container>
 
-        {/* Divider для визуального разделения */}
         <Container maxWidth="lg" sx={{ mt: 5, mb: 3, display: 'flex', justifyContent: 'center', width: '100%' }}>
           <Divider sx={{ 
             bgcolor: 'rgba(255,255,255,0.3)', 

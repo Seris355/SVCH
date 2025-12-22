@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мастер-классы по здоровому питанию</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Мастер-классы по здоровому питанию</h1>
+        
+        <div class="actions">
+            <button onclick="addMasterclass()">Добавить мастер-класс</button>
+            <button onclick="deleteSelected()" id="deleteBtn" disabled>Удалить выбранные</button>
+            <button onclick="loadMasterclasses()">Обновить список</button>
+            <button onclick="downloadFile('json')">Скачать JSON</button>
+            <button onclick="downloadFile('xml')">Скачать XML</button>
+            <button onclick="downloadFile('html')">Скачать HTML</button>
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+        
+        <ul id="masterclassList" class="masterclass-list"></ul>
+    </div>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Редактировать мастер-класс</h2>
+            <input type="text" id="modalName" placeholder="Название">
+            <textarea id="modalDescription" placeholder="Описание"></textarea>
+            <input type="number" id="modalParticipants" placeholder="Участники">
+            <input type="number" id="modalDoctors" placeholder="Врачи">
+            <input type="date" id="modalDate">
+            <div class="card-actions">
+                <button onclick="saveMasterclass()">Сохранить</button>
+                <button onclick="closeModal()">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+

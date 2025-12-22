@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../../components/Header/Header.js';
-import Footer from '../../components/Footer/Footer.js';
 import servicesData from '../../data/services.json';
 import './service_style.css'; 
 
@@ -14,7 +12,6 @@ const Services = () => {
   return (
     <div>
     <main>
-      <Header />
       <section className="services">
         <h2 className="h2_underh">Цены на услуги</h2>
         <div className="services_section">
@@ -45,7 +42,6 @@ const Services = () => {
         </div>
       </section>
     </main>
-    <Footer />
     </div>
   );
 };

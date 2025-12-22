@@ -1,7 +1,5 @@
 import React from 'react';
 import './404.css';
-import Header from '../../components/Header/Header.js';
-import Footer from '../../components/Footer/Footer.js';
 import '../Index/style.css'; 
 import '../../components/Header/header_and_footer_styles.css';
 
@@ -15,7 +13,6 @@ const NotFound = () => {
 
   return (
     <div>
-      <Header />
       <main className="page-container nf-page-container" onMouseMove={handleMouseMove}>
         <div id="spotlight" className="spotlight" />
         <section className="H1_sec">
@@ -26,7 +23,6 @@ const NotFound = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };

@@ -13,8 +13,6 @@ const Footer = () => {
         bgcolor: 'rgb(0, 0, 0)',
         color: 'rgb(255, 255, 255)',
         fontFamily: '"Cormorant Garamond", serif',
-        py: { xs: '3vw', sm: '5vw' },
-        px: 2,
       }}
     >
       <Grid
@@ -22,9 +20,8 @@ const Footer = () => {
         spacing={3}
         justifyContent="space-between"
         alignItems="center"
-        sx={{ mb: { xs: '3vw', sm: '5vw' } }}
       >
-        <Grid item xs={12} sm={3} textAlign="center">
+        <Grid textAlign="center">
           <IconButton
             aria-label="logo"
             sx={{

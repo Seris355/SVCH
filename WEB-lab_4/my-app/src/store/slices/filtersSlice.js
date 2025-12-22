@@ -1,49 +1,34 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  category: 'all',
-  difficulty: 'all',
-  priceRange: 'all',
-  sortBy: 'newest',
-  searchQuery: ''
-};
+  search: '',
+  minPrice: 0,
+  maxPrice: 10000,
+  sortBy: 'title' 
+}
 
 const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    setCategory: (state, action) => {
-      state.category = action.payload;
-    },
-    setDifficulty: (state, action) => {
-      state.difficulty = action.payload;
+    setSearch: (state, action) => {
+      state.search = action.payload
     },
     setPriceRange: (state, action) => {
-      state.priceRange = action.payload;
+      state.minPrice = action.payload.min
+      state.maxPrice = action.payload.max
     },
     setSortBy: (state, action) => {
-      state.sortBy = action.payload;
-    },
-    setSearchQuery: (state, action) => {
-      state.searchQuery = action.payload;
+      state.sortBy = action.payload
     },
     resetFilters: (state) => {
-      state.category = 'all';
-      state.difficulty = 'all';
-      state.priceRange = 'all';
-      state.sortBy = 'newest';
-      state.searchQuery = '';
+      state.search = ''
+      state.minPrice = 0
+      state.maxPrice = 10000
+      state.sortBy = 'title'
     }
   }
-});
+})
 
-export const {
-  setCategory,
-  setDifficulty,
-  setPriceRange,
-  setSortBy,
-  setSearchQuery,
-  resetFilters
-} = filtersSlice.actions;
-
-export default filtersSlice.reducer;
+export const { setSearch, setPriceRange, setSortBy, resetFilters } = filtersSlice.actions
+export default filtersSlice.reducer
