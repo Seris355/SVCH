@@ -27,6 +27,8 @@ app.get('/', (req, res) => {
 
 // API Routes
 app.use('/api/instructors', require('./routes/instructorRoutes'));
+app.use('/api/participants', require('./routes/participantRoutes'));
+app.use('/api/masterclasses', require('./routes/masterClassRoutes'));
 
 // Start server
 app.listen(PORT, () => {
