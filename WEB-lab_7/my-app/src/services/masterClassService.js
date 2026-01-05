@@ -37,5 +37,3 @@ export const masterClassService = {
     return response.data;
   },
 };
-
-

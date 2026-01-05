@@ -185,6 +185,24 @@ exports.deleteParticipant = async (req, res) => {
       });
     }
 
+    // Проверка использования участника в мастер-классах
+    const { MasterClass } = require('../models');
+    const { Op } = require('sequelize');
+    const masterClasses = await MasterClass.findAll({
+      where: {
+        participantIds: {
+          [Op.contains]: [parseInt(id)],
+        },
+      },
+    });
+
+    if (masterClasses.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: `Невозможно удалить участника. Он зарегистрирован на ${masterClasses.length} мастер-классах. Сначала удалите его из связанных мастер-классов.`,
+      });
+    }
+
     await participant.destroy();
 
     res.json({

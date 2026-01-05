@@ -37,5 +37,3 @@ export const instructorService = {
     return response.data;
   },
 };
-
-

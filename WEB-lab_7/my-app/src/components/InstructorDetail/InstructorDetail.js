@@ -54,5 +54,3 @@ const InstructorDetail = ({ instructor, onClose }) => {
 };
 
 export default InstructorDetail;
-
-

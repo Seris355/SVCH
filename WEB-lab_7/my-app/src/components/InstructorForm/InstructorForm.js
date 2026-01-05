@@ -126,5 +126,3 @@ const InstructorForm = ({ instructor, onSubmit, onClose }) => {
 };
 
 export default InstructorForm;
-
-

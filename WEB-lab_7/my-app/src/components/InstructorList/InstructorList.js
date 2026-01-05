@@ -130,5 +130,3 @@ const InstructorList = ({
 };
 
 export default InstructorList;
-
-

@@ -174,6 +174,19 @@ exports.deleteInstructor = async (req, res) => {
       });
     }
 
+    // Проверка использования инструктора в мастер-классах
+    const { MasterClass } = require('../models');
+    const masterClassesCount = await MasterClass.count({
+      where: { instructorId: id },
+    });
+
+    if (masterClassesCount > 0) {
+      return res.status(400).json({
+        success: false,
+        message: `Невозможно удалить инструктора. Он используется в ${masterClassesCount} мастер-классах. Сначала удалите или измените связанные мастер-классы.`,
+      });
+    }
+
     await instructor.destroy();
 
     res.json({
