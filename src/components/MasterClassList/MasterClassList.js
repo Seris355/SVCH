@@ -35,7 +35,7 @@ const MasterClassList = ({
             type="text"
             value={filters.search}
             onChange={(e) => onFilterChange('search', e.target.value)}
-            onKeyPress={(e) => {                       //ячясмить о орлдп орлмор млормл иормл ирмомролрмоолрмломромормормормормрмормормрммроморрмормророммроомр
+            onKeyPress={(e) => {                      
               if (e.key === 'Enter' && onSearch) {
                 onSearch();
               }

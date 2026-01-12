@@ -1,9 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-// Пользовательские валидаторы
 const customValidators = {
-  // Валидатор для проверки корректности ФИО (только буквы, пробелы, дефисы)
   isValidFullName(value) {
     if (!value) return;
 
@@ -12,18 +10,15 @@ const customValidators = {
       throw new Error('ФИО может содержать только буквы, пробелы и дефисы');
     }
 
-    // Проверка что есть хотя бы имя и фамилия
     const parts = value.trim().split(/\s+/);
     if (parts.length < 2) {
       throw new Error('ФИО должно содержать минимум имя и фамилию');
     }
   },
 
-  // Валидатор для проверки формата телефона (более гибкий формат)
   isValidPhone(value) {
     if (!value) return;
 
-    // Простая проверка: минимум 10 символов, содержит цифры
     const phoneRegex = /^[\d\s\-\+\(\)\.]{10,}$/;
     if (!phoneRegex.test(value)) {
       throw new Error('Телефон должен содержать минимум 10 символов и может включать цифры, пробелы, дефисы, плюсы, скобки и точки');

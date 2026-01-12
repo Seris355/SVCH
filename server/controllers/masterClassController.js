@@ -1,7 +1,6 @@
 const { MasterClass, Instructor, Participant } = require('../models');
 const { Op } = require('sequelize');
 
-// Получить все мастер-классы с пагинацией, сортировкой, фильтрацией и поиском
 exports.getAllMasterClasses = async (req, res) => {
   try {
     const {
@@ -18,12 +17,11 @@ exports.getAllMasterClasses = async (req, res) => {
     const offset = (page - 1) * limit;
     const where = {}; 
 
-    // Фильтрация по инструктору
+
     if (instructorId) {
       where.instructorId = parseInt(instructorId);
     }
 
-    // Фильтрация по цене
     if (minPrice || maxPrice) {
       where.price = {};
       if (minPrice) {
@@ -34,7 +32,6 @@ exports.getAllMasterClasses = async (req, res) => {
       }
     }
 
-    // Поиск по нескольким полям
     if (search) {
       where[Op.or] = [
         { name: { [Op.iLike]: `%${search}%` } },
@@ -56,7 +53,7 @@ exports.getAllMasterClasses = async (req, res) => {
       order: [[sortBy, sortOrder.toUpperCase()]],
     });
 
-    // Получаем данные участников для каждого мастер-класса
+
     const masterClassesWithParticipants = await Promise.all(
       rows.map(async (masterClass) => {
         const participantIds = masterClass.participantIds || [];
@@ -93,7 +90,7 @@ exports.getAllMasterClasses = async (req, res) => {
   }
 };
 
-// Получить мастер-класс по ID
+
 exports.getMasterClassById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -114,7 +111,6 @@ exports.getMasterClassById = async (req, res) => {
       });
     }
 
-    // Получаем данные участников
     const participantIds = masterClass.participantIds || [];
     const participants = participantIds.length > 0
       ? await Participant.findAll({
@@ -139,7 +135,7 @@ exports.getMasterClassById = async (req, res) => {
   }
 };
 
-// Проверить существование мастер-класса
+
 exports.checkMasterClassExists = async (req, res) => {
   try {
     const { id } = req.params;
@@ -158,12 +154,12 @@ exports.checkMasterClassExists = async (req, res) => {
   }
 };
 
-// Создать новый мастер-класс
+
 exports.createMasterClass = async (req, res) => {
   try {
     const { name, description, price, photo, instructorId, participantIds } = req.body;
 
-    // Проверка существования инструктора
+
     const instructor = await Instructor.findByPk(instructorId);
     if (!instructor) {
       return res.status(404).json({
@@ -172,7 +168,7 @@ exports.createMasterClass = async (req, res) => {
       });
     }
 
-    // Проверка существования участников
+
     if (participantIds && participantIds.length > 0) {
       const participants = await Participant.findAll({
         where: { id: { [Op.in]: participantIds } },
@@ -210,10 +206,10 @@ exports.createMasterClass = async (req, res) => {
       data: createdMasterClass,
     });
   } catch (error) {
-    // Обработка ошибок валидации Sequelize
+
     if (error.name === 'SequelizeValidationError') {
       let errorMessages = error.errors ? error.errors.map(e => e.message).join(', ') : error.message;
-      // Убираем префикс "Validation error: " если он есть
+
       errorMessages = errorMessages.replace(/^Validation error:\s*/i, '');
       return res.status(400).json({
         success: false,
@@ -230,7 +226,7 @@ exports.createMasterClass = async (req, res) => {
   }
 };
 
-// Обновить мастер-класс
+
 exports.updateMasterClass = async (req, res) => {
   try {
     const { id } = req.params;
@@ -245,7 +241,7 @@ exports.updateMasterClass = async (req, res) => {
       });
     }
 
-    // Проверка существования инструктора
+
     if (instructorId) {
       const instructor = await Instructor.findByPk(instructorId);
       if (!instructor) {
@@ -256,7 +252,7 @@ exports.updateMasterClass = async (req, res) => {
       }
     }
 
-    // Проверка существования участников
+
     if (participantIds && participantIds.length > 0) {
       const participants = await Participant.findAll({
         where: { id: { [Op.in]: participantIds } },
@@ -294,10 +290,10 @@ exports.updateMasterClass = async (req, res) => {
       data: updatedMasterClass,
     });
   } catch (error) {
-    // Обработка ошибок валидации Sequelize
+
     if (error.name === 'SequelizeValidationError') {
       let errorMessages = error.errors ? error.errors.map(e => e.message).join(', ') : error.message;
-      // Убираем префикс "Validation error: " если он есть
+
       errorMessages = errorMessages.replace(/^Validation error:\s*/i, '');
       return res.status(400).json({
         success: false,
@@ -314,7 +310,7 @@ exports.updateMasterClass = async (req, res) => {
   }
 };
 
-// Удалить мастер-класс
+
 exports.deleteMasterClass = async (req, res) => {
   try {
     const { id } = req.params;

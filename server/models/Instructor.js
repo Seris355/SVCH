@@ -1,9 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-// Пользовательские валидаторы
 const customValidators = {
-  // Валидатор для проверки корректности ФИО (только буквы, пробелы, дефисы)
   isValidFullName(value) {
     if (!value) return;
 
@@ -12,14 +10,12 @@ const customValidators = {
       throw new Error('ФИО может содержать только буквы, пробелы и дефисы');
     }
 
-    // Проверка что есть хотя бы имя и фамилия
     const parts = value.trim().split(/\s+/);
     if (parts.length < 2) {
       throw new Error('ФИО должно содержать минимум имя и фамилию');
     }
   },
 
-  // Валидатор для специализации (только допустимые символы)
   isValidSpecialization(value) {
     if (!value) return;
 

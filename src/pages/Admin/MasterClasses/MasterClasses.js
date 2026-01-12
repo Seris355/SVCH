@@ -51,7 +51,7 @@ const MasterClasses = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Вы уверены, что хотите удалить этот мастер-класс?')) {
       try {
-        await dispatch(deleteMasterClass(id)).unwrap(); // извлекает результат или бросает ошибку из rejected состояния
+        await dispatch(deleteMasterClass(id)).unwrap(); 
         const params = {
           page: pagination.page,
           limit: pagination.limit,

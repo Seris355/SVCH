@@ -1,7 +1,6 @@
 const { Instructor } = require('../models');
 const { Op } = require('sequelize');
 
-// Получить всех инструкторов с пагинацией, сортировкой, фильтрацией и поиском
 exports.getAllInstructors = async (req, res) => {
   try {
     const {
@@ -16,14 +15,12 @@ exports.getAllInstructors = async (req, res) => {
     const offset = (page - 1) * limit;
     const where = {};
 
-    // Фильтрация по специализации
     if (specialization) {
       where.specialization = {
         [Op.iLike]: `%${specialization}%`,
       };
     }
 
-    // Поиск по нескольким полям
     if (search) {
       where[Op.or] = [
         { fullName: { [Op.iLike]: `%${search}%` } },
@@ -31,7 +28,6 @@ exports.getAllInstructors = async (req, res) => {
       ];
     }
 
-    // Валидация и ограничение сортировки
     const allowedSortFields = ['id', 'fullName'];
     const validSortBy = allowedSortFields.includes(sortBy) ? sortBy : 'id';
 
@@ -61,7 +57,6 @@ exports.getAllInstructors = async (req, res) => {
   }
 };
 
-// Получить инструктора по ID
 exports.getInstructorById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -87,7 +82,6 @@ exports.getInstructorById = async (req, res) => {
   }
 };
 
-// Проверить существование инструктора
 exports.checkInstructorExists = async (req, res) => {
   try {
     const { id } = req.params;
@@ -106,7 +100,6 @@ exports.checkInstructorExists = async (req, res) => {
   }
 };
 
-// Создать нового инструктора
 exports.createInstructor = async (req, res) => {
   try {
     const { fullName, specialization } = req.body;
@@ -122,10 +115,8 @@ exports.createInstructor = async (req, res) => {
       data: instructor,
     });
   } catch (error) {
-    // Обработка ошибок валидации Sequelize
     if (error.name === 'SequelizeValidationError') {
       let errorMessages = error.errors ? error.errors.map(e => e.message).join(', ') : error.message;
-      // Убираем префикс "Validation error: " если он есть
       errorMessages = errorMessages.replace(/^Validation error:\s*/i, '');
       return res.status(400).json({
         success: false,
@@ -134,7 +125,6 @@ exports.createInstructor = async (req, res) => {
       });
     }
     
-    // Обработка ошибок уникальности
     if (error.name === 'SequelizeUniqueConstraintError') {
       let errorMessage = 'Нарушение уникальности данных';
       if (error.errors && error.errors.length > 0) {
@@ -155,7 +145,6 @@ exports.createInstructor = async (req, res) => {
   }
 };
 
-// Обновить инструктора
 exports.updateInstructor = async (req, res) => {
   try {
     const { id } = req.params;
@@ -181,10 +170,8 @@ exports.updateInstructor = async (req, res) => {
       data: instructor,
     });
   } catch (error) {
-    // Обработка ошибок валидации Sequelize
     if (error.name === 'SequelizeValidationError') {
       let errorMessages = error.errors ? error.errors.map(e => e.message).join(', ') : error.message;
-      // Убираем префикс "Validation error: " если он есть
       errorMessages = errorMessages.replace(/^Validation error:\s*/i, '');
       return res.status(400).json({
         success: false,
@@ -193,7 +180,6 @@ exports.updateInstructor = async (req, res) => {
       });
     }
     
-    // Обработка ошибок уникальности
     if (error.name === 'SequelizeUniqueConstraintError') {
       let errorMessage = 'Нарушение уникальности данных';
       if (error.errors && error.errors.length > 0) {
@@ -214,7 +200,6 @@ exports.updateInstructor = async (req, res) => {
   }
 };
 
-// Удалить инструктора
 exports.deleteInstructor = async (req, res) => {
   try {
     const { id } = req.params;
@@ -228,7 +213,6 @@ exports.deleteInstructor = async (req, res) => {
       });
     }
 
-    // Проверка использования инструктора в мастер-классах
     const { MasterClass } = require('../models');
     const masterClassesCount = await MasterClass.count({
       where: { instructorId: id },

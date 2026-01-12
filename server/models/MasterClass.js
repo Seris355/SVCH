@@ -1,9 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-// Пользовательские валидаторы
 const customValidators = {
-  // Валидатор для проверки корректности цены
   isValidPrice(value) {
     if (value === null || value === undefined) return;
 
@@ -16,19 +14,16 @@ const customValidators = {
       throw new Error('Цена должна быть положительной');
     }
 
-    // Проверяем что не больше 2 знаков после запятой
     if (!/^\d+(\.\d{1,2})?$/.test(value.toString())) {
       throw new Error('Цена может содержать максимум 2 знака после запятой');
     }
   },
 
-  // Валидатор для проверки корректности массива participantIds
   isValidParticipantIds(value) {
     if (!Array.isArray(value)) {
       throw new Error('participantIds должен быть массивом');
     }
 
-    // Проверяем что все элементы являются числами
     for (const id of value) {
       if (!Number.isInteger(id) || id <= 0) {
         throw new Error('Все ID участников должны быть положительными целыми числами');

@@ -1,7 +1,6 @@
 const { Participant } = require('../models');
 const { Op, Sequelize } = require('sequelize');
 
-// Получить всех участников с пагинацией, сортировкой, фильтрацией и поиском
 exports.getAllParticipants = async (req, res) => {
   try {
     const {
@@ -17,21 +16,18 @@ exports.getAllParticipants = async (req, res) => {
     const offset = (page - 1) * limit;
     const where = {};
 
-    // Фильтрация по email
     if (email) {
       where.email = {
         [Op.iLike]: `%${email}%`,
       };
     }
 
-    // Фильтрация по телефону
     if (phone) {
       where.phone = {
         [Op.iLike]: `%${phone}%`,
       };
     }
 
-    // Поиск по нескольким полям
     if (search) {
       where[Op.or] = [
         { fullName: { [Op.iLike]: `%${search}%` } },
@@ -40,11 +36,9 @@ exports.getAllParticipants = async (req, res) => {
       ];
     }
 
-    // Валидация и ограничение сортировки
     const allowedSortFields = ['id', 'fullName'];
     const validSortBy = allowedSortFields.includes(sortBy) ? sortBy : 'id';
     
-    // Для сортировки по фамилии (первое слово из fullName) используем split_part
     let orderBy;
     if (validSortBy === 'fullName') {
       orderBy = [[Sequelize.literal("split_part(\"fullName\", ' ', 1)"), sortOrder.toUpperCase()]];
@@ -78,7 +72,6 @@ exports.getAllParticipants = async (req, res) => {
   }
 };
 
-// Получить участника по ID
 exports.getParticipantById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -104,7 +97,6 @@ exports.getParticipantById = async (req, res) => {
   }
 };
 
-// Проверить существование участника
 exports.checkParticipantExists = async (req, res) => {
   try {
     const { id } = req.params;
@@ -123,7 +115,6 @@ exports.checkParticipantExists = async (req, res) => {
   }
 };
 
-// Создать нового участника
 exports.createParticipant = async (req, res) => {
   try {
     const { fullName, email, phone } = req.body;
@@ -140,10 +131,8 @@ exports.createParticipant = async (req, res) => {
       data: participant,
     });
   } catch (error) {
-    // Обработка ошибок валидации Sequelize
     if (error.name === 'SequelizeValidationError') {
       let errorMessages = error.errors ? error.errors.map(e => e.message).join(', ') : error.message;
-      // Убираем префикс "Validation error: " если он есть
       errorMessages = errorMessages.replace(/^Validation error:\s*/i, '');
       return res.status(400).json({
         success: false,
@@ -152,7 +141,6 @@ exports.createParticipant = async (req, res) => {
       });
     }
     
-    // Обработка ошибок уникальности
     if (error.name === 'SequelizeUniqueConstraintError') {
       let errorMessage = 'Нарушение уникальности данных';
       if (error.errors && error.errors.length > 0) {
@@ -183,7 +171,6 @@ exports.createParticipant = async (req, res) => {
   }
 };
 
-// Обновить участника
 exports.updateParticipant = async (req, res) => {
   try {
     const { id } = req.params;
@@ -210,10 +197,8 @@ exports.updateParticipant = async (req, res) => {
       data: participant,
     });
   } catch (error) {
-    // Обработка ошибок валидации Sequelize
     if (error.name === 'SequelizeValidationError') {
       let errorMessages = error.errors ? error.errors.map(e => e.message).join(', ') : error.message;
-      // Убираем префикс "Validation error: " если он есть
       errorMessages = errorMessages.replace(/^Validation error:\s*/i, '');
       return res.status(400).json({
         success: false,
@@ -222,7 +207,6 @@ exports.updateParticipant = async (req, res) => {
       });
     }
     
-    // Обработка ошибок уникальности
     if (error.name === 'SequelizeUniqueConstraintError') {
       let errorMessage = 'Нарушение уникальности данных';
       if (error.errors && error.errors.length > 0) {
@@ -253,7 +237,6 @@ exports.updateParticipant = async (req, res) => {
   }
 };
 
-// Удалить участника
 exports.deleteParticipant = async (req, res) => {
   try {
     const { id } = req.params;
@@ -267,7 +250,6 @@ exports.deleteParticipant = async (req, res) => {
       });
     }
 
-    // Проверка использования участника в мастер-классах
     const { MasterClass } = require('../models');
     const { Op } = require('sequelize');
     const masterClasses = await MasterClass.findAll({
